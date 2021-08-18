@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-add-form',
@@ -10,21 +10,24 @@ export class AddFormComponent implements OnInit {
 
   fname='';
   lname='';
-  pnumber=0;
-  email='';
+  pnumber='';
+  Email='';
   adr='';
   ctry='';
   st='';
 
 
   profileForm = new FormGroup({
-    firstName: new FormControl(''),
-    lastName: new FormControl(''),
-    phoneNumber: new FormControl(''),
-    email: new FormControl(''),
-    address: new FormControl(''),
-    country: new FormControl(''),
-    state: new FormControl('')
+    firstName: new FormControl('',Validators.required),
+    lastName: new FormControl(null,Validators.required),
+    phoneNumber: new FormControl([Validators.required,Validators.pattern('[- +()0-9]+')]),
+    email: new FormControl([
+      Validators.required,
+      Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
+    ]),
+    address: new FormControl(null,Validators.required),
+    country: new FormControl(null,Validators.required),
+    state: new FormControl(null,Validators.required)
   });
 
   @Output() form: any = new EventEmitter<{firstName:string,lastName:string,phoneNumber:number,email:string,address:string,country:string,state:string}>();
@@ -34,16 +37,17 @@ export class AddFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onSubmit(firstName:string,lastName:string,phoneNumber:number,email:string,address:string,country:string,state:string) {
+  onSubmit(form:any) {
     this.fname='';
     this.lname='';
-    this.pnumber=0;
-    this.email='';
+    this.pnumber='';
+    this.Email='';
     this.adr='';
     this.ctry='';
     this.st='';
-    this.form.emit({firstName,lastName,phoneNumber,email,address,country,state});
-    // console.log(this.profileForm.value)
+    this.form.emit(this.profileForm.value)
+   
+    console.log(this.profileForm.value)
   }
 
 }

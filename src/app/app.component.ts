@@ -8,13 +8,12 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'Form';
 
-  formList: {firstName:string,lastName:string,phoneNumber:number,email:string,address1:string,country:string,state:string}[]
-  = [];
+  formList:any = [];
 
-  onFormAdded(form:{firstName:string,lastName:string,phoneNumber:number,email:string,address1:string,country:string,state:string})
+  onFormAdded(data:any)
   {
-       this.formList.push({firstName:form.firstName,lastName:form.lastName,phoneNumber:form.phoneNumber,email:form.email,address1:form.address1,country:form.country,state:form.state})
-       localStorage.setItem('details',JSON.stringify(this.formList));  
+       this.formList.push({firstName:data.firstName,lastName:data.lastName,phoneNumber:data.phoneNumber,email:data.email,address1:data.address1,country:data.country,state:data.state})
+       localStorage.setItem('form',JSON.stringify(this.formList));  
   }
 
  

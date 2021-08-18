@@ -1,8 +1,8 @@
-<h1>{{title}}</h1>
+<h1 class="row justify-content-center">{{title}}</h1>
 <br>
 <br>
 <app-add-form (form)="onFormAdded($event)"></app-add-form>
 
 <div class="container mt-5">
-  <app-display-form></app-display-form>
+  <app-display-form [formList]='formList'></app-display-form>
 </div>
