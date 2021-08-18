@@ -12,7 +12,7 @@ export class AppComponent {
 
   onFormAdded(data:any)
   {
-       this.formList.push({firstName:data.firstName,lastName:data.lastName,phoneNumber:data.phoneNumber,email:data.email,address1:data.address1,country:data.country,state:data.state})
+       this.formList.push({firstName:data.firstName,lastName:data.lastName,phoneNumber:data.phoneNumber,email:data.email,address:data.address,country:data.country,state:data.state})
        localStorage.setItem('form',JSON.stringify(this.formList));  
   }
 
